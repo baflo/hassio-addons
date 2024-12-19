@@ -9,7 +9,7 @@ on:
 
 jobs:
   sort_json:
-    if: github.repository_owner == 'alexbelgium'
+    if: github.repository_owner == 'baflo'
     runs-on: ubuntu-20.04
     steps:
     - name: Checkout Repo

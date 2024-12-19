@@ -14,19 +14,19 @@ on:
 
 jobs:
   make-executable:
-    if: github.repository_owner == 'alexbelgium'
+    if: github.repository_owner == 'baflo'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
-        
+
       - name: Make scripts executable
         run: |
           echo "Starting"
           git config core.filemode true
           # shellcheck disable=SC2086,SC2046
           #git update-index --chmod=+x $(find . -type f -iname "*.sh")
-          chmod u+x $(find . -type f -iname "*.sh") 
+          chmod u+x $(find . -type f -iname "*.sh")
           #git commit -am "fixing the script permissions..."
 
       - name: Commit if needed
@@ -48,7 +48,7 @@ jobs:
         with:
           # Full git history is needed to get a proper list of changed files within `super-linter`
           fetch-depth: 0
-          
+
        ####################
        # Run Super Linter #
        ####################
@@ -64,7 +64,7 @@ jobs:
 
   check_crlf:
     name: Check CRLF action
-    if: github.repository_owner == 'alexbelgium'
+    if: github.repository_owner == 'baflo'
     runs-on: ubuntu-latest
 
     steps:

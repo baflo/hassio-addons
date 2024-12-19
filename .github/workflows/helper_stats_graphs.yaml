@@ -7,7 +7,7 @@ on:
 
 jobs:
   stats_graphs:
-    if: github.repository_owner == 'alexbelgium'
+    if: github.repository_owner == 'baflo'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo

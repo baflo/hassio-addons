@@ -2,13 +2,13 @@
 ---
 # This workflow finds and fixes CRLF endings in a repository
 name: Fix CRLF Endings
-on: 
+on:
   workflow_call:
   workflow_dispatch:
-  
+
 jobs:
   crlf-to-lf:
-    if: github.repository_owner == 'alexbelgium'
+    if: github.repository_owner == 'baflo'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository contents
@@ -25,7 +25,7 @@ jobs:
 
   fix-crlf:
     name: Fix CRLF Endings
-    if: github.repository_owner == 'alexbelgium'
+    if: github.repository_owner == 'baflo'
     runs-on: ubuntu-latest # Use a Linux runner
     steps:
       - name: Checkout repository contents
