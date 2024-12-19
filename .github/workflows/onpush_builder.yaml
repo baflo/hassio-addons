@@ -16,7 +16,7 @@ on:
 
 jobs:
   correct_path_filters:
-    if: github.repository_owner == 'alexbelgium'
+    if: github.repository_owner == 'baflo'
     runs-on: ubuntu-latest
     steps:
       - name: ↩️ Checkout
@@ -29,12 +29,12 @@ jobs:
           # Go through all folders, add to filters if not existing
           for f in $( find -- * -maxdepth 0 -type d | sort -r ); do
             if [ -f "$f"/config.json ]; then
-            
+
               # Add to file
               if ! grep "$f:" ".github/paths-filter.yml"; then
                 echo "$f: $f/config.*" >> ".github/paths-filter.yml"
               fi
-              
+
               # Identify addons with true images
               if [ "$(jq '.image' "$f/config.json")" != null ]; then
                 sed -i "/$f/ s/ # Image : yes//g" ".github/paths-filter.yml"
@@ -74,7 +74,7 @@ jobs:
     if: ${{ needs.check-addon-changes.outputs.changedAddons != '[]' }}
     needs: [check-addon-changes, correct-CRLF]
     runs-on: ubuntu-latest
-    strategy: 
+    strategy:
       fail-fast: false
       matrix:
         addon: ${{ fromJSON(needs.check-addon-changes.outputs.changedAddons) }}
@@ -90,7 +90,7 @@ jobs:
           #git update-index --chmod=+x $(find "$path" -type f -iname "*.sh")
           chmod u+x $(find "$path" -type f -iname "*.sh") || true
           #git commit -am "fixing the script permissions..."
-        env: 
+        env:
           path: "./${{ matrix.addon }}"
       - name: Commit if needed
         uses: EndBug/add-and-commit@v9
@@ -140,7 +140,7 @@ jobs:
         env:
           HEAD: "${{ github.head_ref }}"
         run: |
-          # shellcheck disable=SC2157,SC2086 
+          # shellcheck disable=SC2157,SC2086
           if [[ "${{ steps.info.outputs.architectures }}" =~ ${{ matrix.arch }} ]]; then
              # shellcheck disable=SC2129
              echo "build_arch=true" >> $GITHUB_OUTPUT;
@@ -221,7 +221,7 @@ jobs:
             sed -i "1i\## $version ($(date '+%d-%m-%Y'))" CHANGELOG.md
             #fi
           fi
-        env: 
+        env:
           path: "./${{ matrix.addon }}"
       - name: Commit if needed
         uses: EndBug/add-and-commit@v9
